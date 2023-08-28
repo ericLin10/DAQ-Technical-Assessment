@@ -1,14 +1,25 @@
 import net from 'net';
 import { WebSocket, WebSocketServer } from 'ws';
-
+const fs = require('fs');
 const TCP_PORT = parseInt(process.env.TCP_PORT || '12000', 10);
 
 const tcpServer = net.createServer();
 const websocketServer = new WebSocketServer({ port: 8080 });
 
+interface temperature_list {
+    temperatures: number[];
+}
+
+let last_check:number = Date.now();
+let last_temperatures: number[] = [];
+fs.writeFile('incidents.log', "Timestamps of temperature out of range for current session\n", (err:Error) => {
+    if (err) throw err;
+  }); 
+
 tcpServer.on('connection', (socket) => {
     console.log('TCP client connected');
-    
+
+
     socket.on('data', (msg) => {
         console.log(msg.toString());
 
@@ -17,11 +28,26 @@ tcpServer.on('connection', (socket) => {
 
         try{
             let currJSON = JSON.parse(msg.toString());
+            last_temperatures.push(currJSON.battery_temperature);
+            let currTime = Date.now();
+            if (currTime - last_check >= 5000) {
+                if (last_temperatures.filter(temp => {return (temp > 80 || temp < 20);}).length >= 3) {
+                    fs.writeFile('incidents.log', currTime.toString() + '\n', { flag: "a+" }, (err:Error) => {
+                        if (err) throw err;
+                      }); 
+                }
+                last_temperatures = [];
+                last_check = currTime;
+            }
+
+
+
             websocketServer.clients.forEach(function each(client) {
                 if (client.readyState === WebSocket.OPEN) {
                   client.send(msg.toString());
                 }
               });
+
         } catch {
             console.log("Incorrectly formatted json");
         }
