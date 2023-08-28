@@ -14,13 +14,18 @@ tcpServer.on('connection', (socket) => {
 
         // HINT: what happens if the JSON in the received message is formatted incorrectly?
         // HINT: see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch
-        let currJSON = JSON.parse(msg.toString());
 
-        websocketServer.clients.forEach(function each(client) {
-            if (client.readyState === WebSocket.OPEN) {
-              client.send(msg.toString());
-            }
-          });
+        try{
+            let currJSON = JSON.parse(msg.toString());
+            websocketServer.clients.forEach(function each(client) {
+                if (client.readyState === WebSocket.OPEN) {
+                  client.send(msg.toString());
+                }
+              });
+        } catch {
+            console.log("Incorrectly formatted json");
+        }
+
     });
 
     socket.on('end', () => {
