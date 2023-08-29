@@ -1,11 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import LiveValue from './live_value'
+import IncidentTimestamps from './incident_timestamps';
 import RedbackLogo from './redback_logo.jpg';
 import './App.css';
+import LiveChart from './temperature-chart';
 
 function App() {
 
-  const [temperature, setTemperature] = useState<number>(0);
+  const [temperature, setTemperature] = useState<number>(1);
+  const [recent_temperatures, add_recent_temperature] = useState<Array<number>>([]);
+  const [timestamp, setTimestamp] = useState<number>(1);
+  const [recent_timestamps, set_recent_timestamps] = useState<Array<number>>([]);
 
   const ws: any = useRef(null);
 
@@ -24,7 +29,21 @@ function App() {
     socket.onmessage = (event) => {
       console.log("got message", event.data);
       let message_obj = JSON.parse(event.data);
-      setTemperature(message_obj["battery_temperature"].toPrecision(3));
+      const temp = message_obj["battery_temperature"].toPrecision(3);
+      const timestamp = message_obj["timestamp"] as number;
+      setTemperature(temp);
+      setTimestamp(timestamp);
+
+      if (temp < 20 || temp > 80) {
+        if (recent_temperatures.length == 10) {
+          recent_temperatures.splice(9,1);
+        } 
+        recent_temperatures.unshift(message_obj["battery_temperature"].toPrecision(3));
+        if (recent_timestamps.length == 10) {
+          recent_timestamps.splice(9,1);
+        }
+        recent_timestamps.unshift(message_obj["timestamp"] as number);
+      }
     };
 
     ws.current = socket;
@@ -38,10 +57,18 @@ function App() {
     <div className="App">
       <header className="App-header">
       <img src={RedbackLogo} className="redback-logo" alt="Redback Racing Logo"/>
-        <p className='value-title'>
-          Live Battery Temperature
-        </p>
-        <LiveValue temp={temperature}/>
+      <div className='left-container'>
+      <div className='current-temperature'>
+          <p className='value-title'>
+            Live Battery Temperature
+          </p>
+          <LiveValue temp={temperature}/>
+      </div>
+      <IncidentTimestamps temperatures = {recent_temperatures} timestamps={recent_timestamps}/>
+      </div>
+      <div className='right-container'>
+          <LiveChart temperatures = {recent_temperatures} timestamps={recent_timestamps}/>
+      </div>
       </header>
     </div>
   );

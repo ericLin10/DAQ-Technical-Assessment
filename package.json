@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@types/node": "^20.5.7",
+    "@visx/visx": "^3.3.0",
+    "apexcharts": "^3.42.0",
+    "chart.js": "^4.4.0",
+    "react-apexcharts": "^1.4.1",
+    "react-chartjs-2": "^5.2.0"
+  },
+  "devDependencies": {
+  }
+}

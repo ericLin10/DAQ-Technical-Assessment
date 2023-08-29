@@ -1,16 +1,26 @@
 .App {
   text-align: center;
+  padding-left:5%;
+  padding-right:5%;
+  background: none;
+  display:flex;
+  align-items: center;
+  justify-content: start;
 }
 
 .App-header {
-  background-color: #000000;
+  background-color: none;
   min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.current-temperature {
+  border: solid white 5px;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .live-value {
@@ -30,3 +40,43 @@
   font-size: calc(25px + 2vmin);
 }
 
+.recent-timestamps {
+  border: solid white 5px;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: 20px;
+}
+
+.recent-timestamps p {
+  font-size: calc(25px + 2vmin);
+  font-style: bold;
+}
+
+.recent-timestamps li {
+  list-style: none;
+}
+
+.recent-timestamps li.hot {
+  background-color: rgb(59, 2, 2);
+}
+
+.recent-timestamps li.cold {
+  background-color: darkslategray;
+}
+
+.apexcharts-tooltip span {
+  color: #fefefe;
+}
+
+.left-container {
+  float:left;
+  height:60%;
+}
+
+.right-container {
+  float:right;
+  margin-left: 10px;
+  width: 80%;
+  height:50%;
+  padding: 5%;
+}
