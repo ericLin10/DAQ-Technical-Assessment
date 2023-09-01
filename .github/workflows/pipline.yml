@@ -11,7 +11,7 @@ jobs:
 
       - name: Install dependecies
         run: |
-          npm install -g npm@latest
+          npm install -g npm@9.3.1
           cd battery-ui
           npm install
           cd .. 
