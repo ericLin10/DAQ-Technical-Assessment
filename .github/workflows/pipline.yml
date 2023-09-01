@@ -7,10 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependecies
-        run: npm install
+        run: |
+          cd battery-ui
+          npm install
+          cd .. 
+          cd streaming-service
+          npm install
+          cd ..
+          cd battery-emulator
+          npm install
+          cd ..
 
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Linting
-        run: npm run lint
+        run:  npm run lint
