@@ -1,0 +1,17 @@
+name: Automated Pipline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+  steps:
+    - name: Lint files
+      run: npm run lint
+
+    - 

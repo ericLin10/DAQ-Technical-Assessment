@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-var fs = require('fs');
 
 interface data {
   timestamps: number[];
@@ -9,7 +8,6 @@ interface data {
 
 function IncidentTimestamps({timestamps, temperatures}: data) {
   
-  let valueColour = 'white';
   const listItems = timestamps.map((timestamp,index) => {
     if (temperatures[index] < 20) {
       return <li className ="cold">{`Timestamp: ${timestamp}   ${temperatures[index]}°C`}</li>

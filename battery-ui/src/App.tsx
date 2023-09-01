@@ -8,9 +8,8 @@ import LiveChart from './temperature-chart';
 function App() {
 
   const [temperature, setTemperature] = useState<number>(1);
-  const [recent_temperatures, add_recent_temperature] = useState<Array<number>>([]);
-  const [timestamp, setTimestamp] = useState<number>(1);
-  const [recent_timestamps, set_recent_timestamps] = useState<Array<number>>([]);
+  const [recent_temperatures] = useState<Array<number>>([]);
+  const [recent_timestamps] = useState<Array<number>>([]);
 
   const ws: any = useRef(null);
 
@@ -30,19 +29,18 @@ function App() {
       console.log("got message", event.data);
       let message_obj = JSON.parse(event.data);
       const temp = message_obj["battery_temperature"].toPrecision(3);
-      const timestamp = message_obj["timestamp"] as number;
+      const timestamp = parseInt(message_obj["timestamp"]);
       setTemperature(temp);
-      setTimestamp(timestamp);
 
       if (temp < 20 || temp > 80) {
-        if (recent_temperatures.length == 10) {
+        if (recent_temperatures.length === 10) {
           recent_temperatures.splice(9,1);
         } 
         recent_temperatures.unshift(message_obj["battery_temperature"].toPrecision(3));
-        if (recent_timestamps.length == 10) {
+        if (recent_timestamps.length === 10) {
           recent_timestamps.splice(9,1);
         }
-        recent_timestamps.unshift(message_obj["timestamp"] as number);
+        recent_timestamps.unshift(timestamp);
       }
     };
 
