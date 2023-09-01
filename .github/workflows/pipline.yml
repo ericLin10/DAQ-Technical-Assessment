@@ -11,6 +11,7 @@ jobs:
 
       - name: Install dependecies
         run: |
+          npm install -g npm@latest
           cd battery-ui
           npm install
           cd .. 
@@ -22,5 +23,5 @@ jobs:
           cd ..
           npm install
 
-      - name: Linting
+      - name: Testing
         run:  npm test
