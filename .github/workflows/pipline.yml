@@ -17,7 +17,7 @@ jobs:
           cd streaming-service
           npm install
           cd ..
-          cd battery-emulator
+          cd data-emulator
           npm install
           cd ..
           npm install
