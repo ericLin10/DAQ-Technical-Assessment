@@ -1,20 +1,13 @@
-name: Automated Pipline
+name: Automated Pipeline
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: push
 
 jobs:
-
-
   linting:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-  steps:
-    - name: checkout
-      uses: actions/checkout@v3
-
-    - name: linting
-      run: npm run lint 
+      - name: Linting
+        run: npm run lint
