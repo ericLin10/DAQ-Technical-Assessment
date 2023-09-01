@@ -19,7 +19,7 @@
     "eslint-config-react": "^1.1.7",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "lint": "^0.8.19"
+    "lint": "^1.1.2"
   },
   "env": {
     "browser": true,
