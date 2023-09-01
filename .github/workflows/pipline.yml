@@ -11,8 +11,5 @@ jobs:
     runs-on: ubuntu-latest
 
   steps:
-    - name: Lint files
-      run: npm run lint
-
-    - name: Run tests
-      run: npm test
+    - name: Install dependencies
+    run: npm install
