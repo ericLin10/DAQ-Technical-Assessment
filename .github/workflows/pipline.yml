@@ -6,6 +6,9 @@ jobs:
   linting:
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependecies
+        run: npm install
+
       - name: Checkout
         uses: actions/checkout@v3
 
