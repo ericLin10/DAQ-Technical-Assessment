@@ -17,22 +17,19 @@ jobs:
       - name: Install dependecies
         run: |
           cd battery-ui
-          rm node_modules
+          npm update
           npm install
           cd .. 
           cd streaming-service
-          rm node_modules
-          npm install
           npm update
+          npm install
           cd ..
           cd data-emulator
-          rm node_modules
-          npm install
           npm update
+          npm install
           cd ..
-          rm node_modules
-          npm install
           npm update
+          npm install
 
       - name: Testing
         run:  npm test
