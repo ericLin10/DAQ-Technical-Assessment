@@ -3,9 +3,6 @@
   padding-left:5%;
   padding-right:5%;
   background: none;
-  display:flex;
-  align-items: center;
-  justify-content: start;
 }
 
 .App-header {
@@ -13,11 +10,13 @@
   min-height: 10vh;
   font-size: calc(10px + 2vmin);
   color: white;
-  display: inline-block;
   vertical-align: top;
+  display : flex;
+  flex-direction : row;
 }
 
 .current-temperature {
+  margin-top: 10%;
   border: solid white 5px;
   padding-left: 5%;
   padding-right: 5%;
@@ -34,6 +33,7 @@
   display: flex;
   align-self: center;
   padding-top: 5%;
+  margin-left: 70%;
 }
 
 .value-title {

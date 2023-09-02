@@ -54,8 +54,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <img src={RedbackLogo} className="redback-logo" alt="Redback Racing Logo"/>
       <div className='left-container'>
+      <img src={RedbackLogo} className="redback-logo" alt="Redback Racing Logo"/>
       <div className='current-temperature'>
           <p className='value-title'>
             Live Battery Temperature
@@ -65,6 +65,9 @@ function App() {
       <IncidentTimestamps temperatures = {recent_temperatures} timestamps={recent_timestamps}/>
       </div>
       <div className='right-container'>
+          <p className='value-title'>
+            Live Battery Temperature Chart
+          </p>
           <LiveChart temperatures = {recent_temperatures} timestamps={recent_timestamps}/>
       </div>
       </header>

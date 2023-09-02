@@ -40,7 +40,7 @@ function LiveChart({timestamps, temperatures}: data) {
     },
     yaxis: {
       title: {
-        text: 'Temperature',
+        text: 'Temperature °C',
         align: 'left',
         margin: 10,
         offsetX: 0,
